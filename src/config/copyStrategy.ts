@@ -20,9 +20,9 @@ export enum CopyStrategy {
  * means trades between $100-$500 use 0.2x multiplier
  */
 export interface MultiplierTier {
-    min: number;          // Minimum trade size in USD (inclusive)
-    max: number | null;   // Maximum trade size in USD (exclusive), null = infinity
-    multiplier: number;   // Multiplier to apply
+    min: number; // Minimum trade size in USD (inclusive)
+    max: number | null; // Maximum trade size in USD (exclusive), null = infinity
+    multiplier: number; // Multiplier to apply
 }
 
 export interface CopyStrategyConfig {
@@ -291,13 +291,18 @@ export function parseTieredMultipliers(tiersStr: string): MultiplierTier[] {
     }
 
     const tiers: MultiplierTier[] = [];
-    const tierDefs = tiersStr.split(',').map(t => t.trim()).filter(t => t);
+    const tierDefs = tiersStr
+        .split(',')
+        .map((t) => t.trim())
+        .filter((t) => t);
 
     for (const tierDef of tierDefs) {
         // Format: "min-max:multiplier" or "min+:multiplier"
         const parts = tierDef.split(':');
         if (parts.length !== 2) {
-            throw new Error(`Invalid tier format: "${tierDef}". Expected "min-max:multiplier" or "min+:multiplier"`);
+            throw new Error(
+                `Invalid tier format: "${tierDef}". Expected "min-max:multiplier" or "min+:multiplier"`
+            );
         }
 
         const [range, multiplierStr] = parts;
@@ -325,7 +330,9 @@ export function parseTieredMultipliers(tiersStr: string): MultiplierTier[] {
                 throw new Error(`Invalid minimum value in tier "${tierDef}": ${minStr}`);
             }
             if (isNaN(max) || max <= min) {
-                throw new Error(`Invalid maximum value in tier "${tierDef}": ${maxStr} (must be > ${min})`);
+                throw new Error(
+                    `Invalid maximum value in tier "${tierDef}": ${maxStr} (must be > ${min})`
+                );
             }
 
             tiers.push({ min, max, multiplier });
@@ -347,7 +354,9 @@ export function parseTieredMultipliers(tiersStr: string): MultiplierTier[] {
         }
 
         if (current.max > next.min) {
-            throw new Error(`Overlapping tiers: [${current.min}-${current.max}] and [${next.min}-${next.max || '∞'}]`);
+            throw new Error(
+                `Overlapping tiers: [${current.min}-${current.max}] and [${next.min}-${next.max || '∞'}]`
+            );
         }
     }
 

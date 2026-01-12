@@ -7,6 +7,7 @@ Welcome! This guide will help you set up your copy trading bot in **10 minutes o
 Automatically copies trades from successful Polymarket traders to your wallet. Think of it as "follow the experts" for prediction markets.
 
 When a trader you're following makes a bet, the bot:
+
 1. Detects it within 1 second
 2. Calculates your proportional position size
 3. Places the same bet for you automatically
@@ -75,12 +76,13 @@ That's it! Your bot is now running and will copy trades automatically.
 ### 1. Get a Polygon Wallet
 
 **If you don't have one:**
+
 1. Install [MetaMask](https://metamask.io)
 2. Create a new wallet
 3. **Important:** Create a DEDICATED wallet just for the bot (don't use your main wallet!)
 4. Save your:
-   - Wallet address (starts with 0x...)
-   - Private key (Settings → Security & Privacy → Show Private Key)
+    - Wallet address (starts with 0x...)
+    - Private key (Settings → Security & Privacy → Show Private Key)
 
 ### 2. Fund Your Wallet
 
@@ -89,11 +91,13 @@ You need two things in your Polygon wallet:
 #### A) USDC (Trading Capital)
 
 **Option 1: Bridge from Ethereum**
+
 - Visit [Polygon Bridge](https://wallet.polygon.technology/polygon/bridge/deposit)
 - Connect wallet and bridge USDC to Polygon
 - Takes ~10 minutes
 
 **Option 2: Buy on Exchange**
+
 - Buy USDC on Coinbase, Binance, Kraken, etc.
 - Withdraw to your wallet **on Polygon network**
 - Make sure to select "Polygon" not "Ethereum"!
@@ -113,18 +117,20 @@ You need two things in your Polygon wallet:
 5. Click "Create Cluster" (takes ~5 minutes)
 
 **Configure Access:**
+
 1. Click "Database Access" → Add New User
-   - Username: `botuser` (or anything you want)
-   - Password: Generate a strong password
-   - User Privileges: "Read and write to any database"
-   - Click "Add User"
+    - Username: `botuser` (or anything you want)
+    - Password: Generate a strong password
+    - User Privileges: "Read and write to any database"
+    - Click "Add User"
 
 2. Click "Network Access" → Add IP Address
-   - Click "Allow Access from Anywhere"
-   - IP: `0.0.0.0/0`
-   - Click "Confirm"
+    - Click "Allow Access from Anywhere"
+    - IP: `0.0.0.0/0`
+    - Click "Confirm"
 
 **Get Connection String:**
+
 1. Click "Database" → "Connect"
 2. Choose "Connect your application"
 3. Copy the connection string
@@ -136,6 +142,7 @@ Example: `mongodb+srv://botuser:MyPassword123@cluster0.abc123.mongodb.net/polyma
 ### 4. Get RPC Endpoint (Free)
 
 **Option A: Infura (Recommended)**
+
 1. Visit [Infura.io](https://infura.io)
 2. Sign up for free account
 3. Create new project
@@ -145,6 +152,7 @@ Example: `mongodb+srv://botuser:MyPassword123@cluster0.abc123.mongodb.net/polyma
 Example: `https://polygon-mainnet.infura.io/v3/abc123def456...`
 
 **Option B: Alchemy**
+
 1. Visit [Alchemy.com](https://www.alchemy.com)
 2. Sign up and create app
 3. Select "Polygon" network
@@ -155,18 +163,21 @@ Example: `https://polygon-mainnet.infura.io/v3/abc123def456...`
 Visit the [Polymarket Leaderboard](https://polymarket.com/leaderboard) and look for traders with:
 
 ✅ **Good characteristics:**
+
 - Positive total profit (green numbers)
 - Win rate above 55%
 - Active trading (traded in last 7 days)
 - Consistent history (not just one lucky bet)
 
 ❌ **Red flags to avoid:**
+
 - Single big win with no other trades
 - Win rate below 50%
 - Inactive for weeks
 - Massive position sizes you can't afford to copy
 
 **How to get their address:**
+
 1. Click on a trader's profile
 2. Copy their wallet address from the URL
 3. Example: `https://polymarket.com/profile/0x7c3db723f1d4d8cb9c550095203b686cb11e5c6b`
@@ -231,6 +242,7 @@ npm run health-check
 ```
 
 **Expected output if everything is good:**
+
 ```
 🏥 HEALTH CHECK
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -260,6 +272,7 @@ npm start
 ```
 
 **What you'll see:**
+
 ```
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
   🤖 POLYMARKET COPY TRADING BOT
@@ -286,30 +299,30 @@ The bot is now running! It will automatically execute trades when your tracked t
 ### ⚠️ IMPORTANT - Read This First!
 
 1. **Start Small**
-   - Begin with $50-100 to test
-   - Verify the bot works correctly
-   - Scale up gradually
+    - Begin with $50-100 to test
+    - Verify the bot works correctly
+    - Scale up gradually
 
 2. **Use Dedicated Wallet**
-   - Create a fresh wallet ONLY for the bot
-   - Never use your main wallet
-   - Only keep trading capital there
+    - Create a fresh wallet ONLY for the bot
+    - Never use your main wallet
+    - Only keep trading capital there
 
 3. **Diversify**
-   - Copy 3-5 different traders
-   - Don't put all eggs in one basket
-   - Mix different trading styles
+    - Copy 3-5 different traders
+    - Don't put all eggs in one basket
+    - Mix different trading styles
 
 4. **Monitor Daily**
-   - Check bot logs at least once per day
-   - Verify trades are executing correctly
-   - Watch for errors or issues
+    - Check bot logs at least once per day
+    - Verify trades are executing correctly
+    - Watch for errors or issues
 
 5. **Understand the Risks**
-   - You can lose ALL your trading capital
-   - Past performance ≠ future results
-   - No built-in stop-loss
-   - Only invest what you can afford to lose
+    - You can lose ALL your trading capital
+    - Past performance ≠ future results
+    - No built-in stop-loss
+    - Only invest what you can afford to lose
 
 ### Emergency Stop
 
@@ -346,10 +359,12 @@ npm run simulate       # Backtest strategies
 ### Bot won't start
 
 **Error: "USER_ADDRESSES is not defined"**
+
 - Run `npm run setup` to create your .env file
 - Or manually create .env with all required variables
 
 **Error: "MongoDB connection failed"**
+
 - Check MONGO_URI is correct
 - Verify IP whitelist in MongoDB Atlas
 - Test connection in MongoDB Compass
@@ -363,10 +378,12 @@ npm run simulate       # Backtest strategies
 ### Trades failing
 
 **"Insufficient balance"**
+
 - Add USDC to your wallet
 - Get POL for gas fees
 
 **"Price slippage too high"**
+
 - Market moved too fast
 - Increase FETCH_INTERVAL from 1 to 2-3 seconds
 
@@ -377,18 +394,21 @@ npm run simulate       # Backtest strategies
 Once your bot is running successfully:
 
 ### First 24 Hours
+
 - [ ] Monitor continuously
 - [ ] Verify each trade execution
 - [ ] Check position sizing is correct
 - [ ] Ensure no errors in logs
 
 ### Week 1
+
 - [ ] Review profitability daily
 - [ ] Compare your P&L to trader's P&L
 - [ ] Adjust TRADE_MULTIPLIER if needed
 - [ ] Add/remove traders based on performance
 
 ### Ongoing
+
 - [ ] Check logs daily
 - [ ] Research new traders to copy
 - [ ] Optimize your strategy
@@ -408,6 +428,7 @@ Once your bot is running successfully:
 ## Getting Help
 
 **Have questions?**
+
 1. Check this guide thoroughly
 2. Read the [README.md](./README.md)
 3. Run `npm run health-check` to diagnose issues
@@ -435,4 +456,3 @@ npm start
 ---
 
 **Disclaimer:** This software is for educational purposes. Trading involves risk of loss. The developers are not responsible for any financial losses. Only invest what you can afford to lose.
-

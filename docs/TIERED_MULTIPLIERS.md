@@ -35,6 +35,7 @@ TIERED_MULTIPLIERS=min-max:multiplier,min-max:multiplier,min+:multiplier
 ```
 
 **Format rules:**
+
 - Use `min-max` for bounded ranges (e.g., `100-500:0.2`)
 - Use `min+` for infinite upper bound (e.g., `500000+:0.0002`) - must be last tier
 - Ranges are in USD based on the **trader's order size**
@@ -51,11 +52,11 @@ TIERED_MULTIPLIERS=1-10:2.0,10-100:1.0,100-500:0.2,500-1000:0.1,1000-5000:0.02,5
 **What this does:**
 | Trader Order | Multiplier | Your Copy Trade |
 |--------------|------------|-----------------|
-| $5           | 2.0x       | $10             |
-| $50          | 1.0x       | $50             |
-| $500         | 0.1x       | $50             |
-| $10,000      | 0.002x     | $20             |
-| $250,000     | 0.0002x    | $50             |
+| $5 | 2.0x | $10 |
+| $50 | 1.0x | $50 |
+| $500 | 0.1x | $50 |
+| $10,000 | 0.002x | $20 |
+| $250,000 | 0.0002x | $50 |
 
 #### For $1k Account (Simpler)
 
@@ -66,10 +67,10 @@ TIERED_MULTIPLIERS=1-100:2.0,100-1000:0.5,1000-10000:0.1,10000+:0.01
 **What this does:**
 | Trader Order | Multiplier | Your Copy Trade |
 |--------------|------------|-----------------|
-| $50          | 2.0x       | $100            |
-| $500         | 0.5x       | $250            |
-| $5,000       | 0.1x       | $500            |
-| $50,000      | 0.01x      | $500            |
+| $50 | 2.0x | $100 |
+| $500 | 0.5x | $250 |
+| $5,000 | 0.1x | $500 |
+| $50,000 | 0.01x | $500 |
 
 #### For $500 Account (Conservative)
 
@@ -110,10 +111,12 @@ TIERED_MULTIPLIERS=1-1000:2.0,1000+:0.1
 Tiered multipliers apply to both BUY and SELL orders:
 
 **Example:**
+
 - Trader buys $10,000 (tier: 0.01x)
 - You buy: $10,000 × 10% × 0.01x = $10
 
 Later:
+
 - Trader sells 50% of their position ($5,000 worth)
 - You sell: 50% of your position × 0.01x (same tier)
 
@@ -130,6 +133,7 @@ TIERED_MULTIPLIERS=1-100:5.0,100+:0.1
 ```
 
 Even with 5.0x multiplier, orders are still:
+
 - ✅ Capped at `MAX_ORDER_SIZE_USD` ($100)
 - ✅ Capped by available balance
 - ✅ Rejected if below `MIN_ORDER_SIZE_USD` ($1)
@@ -141,6 +145,7 @@ Even with 5.0x multiplier, orders are still:
 **Problem:** Trader makes 50+ small trades ($10-$50) daily. With 10% copy rate, most fall below Polymarket's $1 minimum.
 
 **Solution:**
+
 ```bash
 COPY_PERCENTAGE=10.0
 TIERED_MULTIPLIERS=1-100:3.0,100-1000:1.0,1000+:0.5
@@ -153,6 +158,7 @@ Now $5 trades → $1.50 (10% × 3.0x) = above minimum ✅
 **Problem:** Trader usually makes $100-$1k trades, but occasionally drops $100k+ on high-conviction bets.
 
 **Solution:**
+
 ```bash
 COPY_STRATEGY=PERCENTAGE
 COPY_SIZE=10.0
@@ -167,6 +173,7 @@ TIERED_MULTIPLIERS=1-1000:1.0,1000-10000:0.5,10000-100000:0.1,100000+:0.01
 **Problem:** Want to maximize exposure to trader's small "test" bets, but limit exposure to big swings.
 
 **Solution:**
+
 ```bash
 COPY_STRATEGY=PERCENTAGE
 COPY_SIZE=5.0  # Conservative base 5%
@@ -181,6 +188,7 @@ TIERED_MULTIPLIERS=1-50:4.0,50-500:2.0,500-5000:1.0,5000+:0.2
 ### 1. **Design Your Tiers Based on Trader Behavior**
 
 Analyze the trader's history:
+
 ```bash
 # If trader makes:
 # - 60% of trades: $10-$100
@@ -194,6 +202,7 @@ TIERED_MULTIPLIERS=10-100:1.5,100-1000:1.0,1000-10000:0.3,10000+:0.1
 ### 2. **Start Conservative, Then Adjust**
 
 Begin with narrow multiplier ranges:
+
 ```bash
 # Initial (safe)
 TIERED_MULTIPLIERS=1-1000:1.0,1000+:0.5
@@ -205,11 +214,13 @@ TIERED_MULTIPLIERS=1-100:2.0,100-1000:1.0,1000+:0.2
 ### 3. **Ensure No Gaps in Coverage**
 
 ❌ **Bad (gaps):**
+
 ```bash
 TIERED_MULTIPLIERS=1-100:2.0,200-1000:1.0  # Gap: $100-$200 missing!
 ```
 
 ✅ **Good (continuous):**
+
 ```bash
 TIERED_MULTIPLIERS=1-100:2.0,100-1000:1.0,1000+:0.5
 ```
@@ -217,6 +228,7 @@ TIERED_MULTIPLIERS=1-100:2.0,100-1000:1.0,1000+:0.5
 ### 4. **Combine with MAX_ORDER_SIZE_USD**
 
 Use tiers for scaling, but set absolute caps:
+
 ```bash
 TIERED_MULTIPLIERS=1-100:5.0,100-1000:2.0,1000+:0.5
 MAX_ORDER_SIZE_USD=100.0  # Never risk more than $100 per trade
@@ -225,6 +237,7 @@ MAX_ORDER_SIZE_USD=100.0  # Never risk more than $100 per trade
 ### 5. **Account for Your Balance**
 
 If you have $2,000 balance and copy at 5% per trade:
+
 ```bash
 # With 1.0x max multiplier, max risk = $100 per trade
 TIERED_MULTIPLIERS=1-500:1.0,500-5000:0.2,5000+:0.05
@@ -236,6 +249,7 @@ MAX_ORDER_SIZE_USD=100.0
 ### Single TRADE_MULTIPLIER (Legacy)
 
 Old configuration still works:
+
 ```bash
 COPY_PERCENTAGE=10.0
 TRADE_MULTIPLIER=2.0  # Simple 2x multiplier for all trades
@@ -244,6 +258,7 @@ TRADE_MULTIPLIER=2.0  # Simple 2x multiplier for all trades
 ### Priority Order
 
 If both are set, tiered multipliers take precedence:
+
 ```bash
 TRADE_MULTIPLIER=2.0  # ← Ignored
 TIERED_MULTIPLIERS=1-100:5.0,100+:0.1  # ← Used
@@ -266,6 +281,7 @@ The bot shows which tier is applied:
 ### Startup Message
 
 When bot starts with tiered multipliers:
+
 ```
 ✓ Loaded 10 tiered multipliers
 ```
@@ -275,11 +291,13 @@ When bot starts with tiered multipliers:
 ### "Overlapping tiers" Error
 
 **Error:**
+
 ```
 Failed to parse TIERED_MULTIPLIERS: Overlapping tiers: [100-500] and [400-1000]
 ```
 
 **Fix:** Ensure tier ranges don't overlap:
+
 ```bash
 # ❌ Bad
 TIERED_MULTIPLIERS=100-500:1.0,400-1000:0.5
@@ -291,11 +309,13 @@ TIERED_MULTIPLIERS=100-500:1.0,500-1000:0.5
 ### "Invalid tier format" Error
 
 **Error:**
+
 ```
 Failed to parse TIERED_MULTIPLIERS: Invalid tier format: "100"
 ```
 
 **Fix:** Each tier needs a range and multiplier:
+
 ```bash
 # ❌ Bad
 TIERED_MULTIPLIERS=100:1.0
@@ -309,11 +329,13 @@ TIERED_MULTIPLIERS=100+:1.0
 ### "Infinite upper bound must be last" Error
 
 **Error:**
+
 ```
 Failed to parse TIERED_MULTIPLIERS: Tier with infinite upper bound must be last: 1000+
 ```
 
 **Fix:** Put infinite tier (`+`) at the end:
+
 ```bash
 # ❌ Bad
 TIERED_MULTIPLIERS=1000+:0.1,100-1000:1.0
@@ -327,34 +349,39 @@ TIERED_MULTIPLIERS=100-1000:1.0,1000+:0.1
 **Problem:** Even with high multiplier, small trades below $1 are skipped.
 
 **Check:**
+
 1. Verify `MIN_ORDER_SIZE_USD`:
-   ```bash
-   MIN_ORDER_SIZE_USD=1.0  # Polymarket minimum
-   ```
+
+    ```bash
+    MIN_ORDER_SIZE_USD=1.0  # Polymarket minimum
+    ```
 
 2. Calculate effective copy amount:
-   ```
-   Trader order: $3
-   Copy %: 10%
-   Multiplier: 2.0x
 
-   Final: $3 × 10% × 2.0x = $0.60 ← Below $1 minimum!
-   ```
+    ```
+    Trader order: $3
+    Copy %: 10%
+    Multiplier: 2.0x
+
+    Final: $3 × 10% × 2.0x = $0.60 ← Below $1 minimum!
+    ```
 
 3. **Solution:** Increase multiplier or base copy percentage:
-   ```bash
-   # Increase tier multiplier
-   TIERED_MULTIPLIERS=1-10:5.0,10-100:2.0,100+:1.0
 
-   # Or increase base copy percentage
-   COPY_SIZE=20.0  # Instead of 10.0
-   ```
+    ```bash
+    # Increase tier multiplier
+    TIERED_MULTIPLIERS=1-10:5.0,10-100:2.0,100+:1.0
+
+    # Or increase base copy percentage
+    COPY_SIZE=20.0  # Instead of 10.0
+    ```
 
 ### Orders Capped at MAX_ORDER_SIZE
 
 **Problem:** All large orders are capped at $100.
 
 **Check `MAX_ORDER_SIZE_USD`:**
+
 ```bash
 MAX_ORDER_SIZE_USD=100.0  # This is the cap
 
@@ -407,6 +434,7 @@ MAX_DAILY_VOLUME_USD=1000.0  # Never more than $1k per day (50% of balance)
 ### Step 1: Analyze Trader's Order Distribution
 
 Check their trade history and group by size:
+
 ```
 $1-$100: 45% of trades
 $100-$1,000: 30% of trades
@@ -417,6 +445,7 @@ $10,000+: 5% of trades
 ### Step 2: Determine Your Risk Tolerance
 
 For a $2,000 account:
+
 - Low risk: Max $20 per trade (1%)
 - Medium risk: Max $50 per trade (2.5%)
 - High risk: Max $100 per trade (5%)
@@ -451,6 +480,7 @@ MAX_ORDER_SIZE_USD=50.0  # Safety cap
 ```
 
 Monitor for a week and adjust based on:
+
 - Are you missing profitable small trades? → Increase small-tier multipliers
 - Are large trades too risky? → Decrease large-tier multipliers
 - Hitting MAX_ORDER_SIZE too often? → Increase cap or decrease multipliers
@@ -460,6 +490,7 @@ Monitor for a week and adjust based on:
 **Tiered multipliers solve the fundamental problem of copying large traders with small accounts.**
 
 Key benefits:
+
 - ✅ Don't miss small trades that fall below minimum order size
 - ✅ Don't over-allocate to large trades that would drain your balance
 - ✅ Automatically scale your copies proportionally to trader's behavior

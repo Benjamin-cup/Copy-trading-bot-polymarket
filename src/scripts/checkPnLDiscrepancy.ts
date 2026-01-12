@@ -124,9 +124,7 @@ const checkDiscrepancy = async () => {
         const totalRealized = totalOpenRealized + totalClosedRealized;
 
         console.log(`   • Open positions - Realized P&L: $${totalOpenRealized.toFixed(2)}`);
-        console.log(
-            `   • Closed positions - Realized P&L: $${totalClosedRealized.toFixed(2)}`
-        );
+        console.log(`   • Closed positions - Realized P&L: $${totalClosedRealized.toFixed(2)}`);
         console.log(`   • Unrealized P&L: $${totalUnrealizedPnl.toFixed(2)}`);
         console.log(`   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━`);
         console.log(`   💰 TOTAL REALIZED PROFIT: $${totalRealized.toFixed(2)}\n`);
@@ -180,9 +178,7 @@ const checkDiscrepancy = async () => {
             }
         }
 
-        console.log(
-            `   💰 Calculated realized profit: $${calculatedRealizedPnl.toFixed(2)}`
-        );
+        console.log(`   💰 Calculated realized profit: $${calculatedRealizedPnl.toFixed(2)}`);
         console.log(`   📊 Markets with closed profit: ${marketsWithProfit}\n`);
 
         console.log('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n');
@@ -204,7 +200,7 @@ const checkDiscrepancy = async () => {
 
         console.log('   📈 Why chart shows $0.00:');
         console.log('   • Amount too small ($2-12) for visualization');
-        console.log('   • Timeline doesn\'t start from $0');
+        console.log("   • Timeline doesn't start from $0");
         console.log('   • Chart requires at least several data points');
         console.log('   • UI update delay (can be 1-24 hours)\n');
 

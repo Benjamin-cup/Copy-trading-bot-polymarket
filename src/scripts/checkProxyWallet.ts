@@ -118,9 +118,7 @@ const checkProxyWallet = async () => {
 
         if (proxyActivities && proxyActivities.length > 0) {
             const sampleTrade = proxyActivities[0];
-            console.log(
-                `   Proxy trades contain proxyWallet: ${sampleTrade.proxyWallet || 'N/A'}`
-            );
+            console.log(`   Proxy trades contain proxyWallet: ${sampleTrade.proxyWallet || 'N/A'}`);
         }
 
         console.log('\n   💡 HOW IT WORKS:\n');

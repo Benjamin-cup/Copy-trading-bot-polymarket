@@ -1,0 +1,14 @@
+{
+  "entryPoints": ["src/index.ts"],
+  "out": "docs/api",
+  "exclude": ["src/**/*.test.ts", "src/**/__tests__/**"],
+  "includeVersion": true,
+  "excludePrivate": true,
+  "excludeProtected": true,
+  "excludeInternal": true,
+  "hideGenerator": true,
+  "theme": "default",
+  "readme": "none",
+  "name": "Polymarket Copy Trading Bot API",
+  "tsconfig": "tsconfig.json"
+}

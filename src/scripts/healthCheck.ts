@@ -31,7 +31,9 @@ function printRecommendations(result: any) {
         console.log('   • Check your MONGO_URI in .env file');
         console.log('   • Verify MongoDB Atlas IP whitelist (allow 0.0.0.0/0)');
         console.log('   • Ensure database user has correct permissions');
-        console.log('   • Test connection: https://www.mongodb.com/docs/atlas/troubleshoot-connection\n');
+        console.log(
+            '   • Test connection: https://www.mongodb.com/docs/atlas/troubleshoot-connection\n'
+        );
     }
 
     if (result.checks.rpc.status === 'error') {
@@ -48,7 +50,9 @@ function printRecommendations(result: any) {
         issues.push('❌ Zero USDC Balance');
         console.log(`${colors.red}${colors.bright}\n📋 Balance Issue:${colors.reset}`);
         console.log('   • Your wallet has no USDC to trade with');
-        console.log('   • Bridge USDC to Polygon: https://wallet.polygon.technology/polygon/bridge/deposit');
+        console.log(
+            '   • Bridge USDC to Polygon: https://wallet.polygon.technology/polygon/bridge/deposit'
+        );
         console.log('   • Or buy USDC on an exchange and withdraw to Polygon network');
         console.log('   • Also get POL (MATIC) for gas fees (~$5-10 worth)\n');
     } else if (result.checks.balance.status === 'warning') {
@@ -68,18 +72,26 @@ function printRecommendations(result: any) {
     }
 
     if (issues.length === 0) {
-        console.log(`${colors.green}${colors.bright}\n🎉 All Systems Operational!${colors.reset}\n`);
+        console.log(
+            `${colors.green}${colors.bright}\n🎉 All Systems Operational!${colors.reset}\n`
+        );
         console.log(`${colors.cyan}You're ready to start trading:${colors.reset}`);
         console.log(`   ${colors.green}npm start${colors.reset}\n`);
     } else {
-        console.log(`${colors.red}${colors.bright}\n⚠️  ${issues.length} Issue(s) Found${colors.reset}`);
-        console.log(`\n${colors.yellow}Fix the issues above before starting the bot.${colors.reset}\n`);
+        console.log(
+            `${colors.red}${colors.bright}\n⚠️  ${issues.length} Issue(s) Found${colors.reset}`
+        );
+        console.log(
+            `\n${colors.yellow}Fix the issues above before starting the bot.${colors.reset}\n`
+        );
     }
 }
 
 function printConfiguration() {
     console.log(`${colors.cyan}📊 Configuration Summary:${colors.reset}\n`);
-    console.log(`   Trading Wallet: ${ENV.PROXY_WALLET.slice(0, 6)}...${ENV.PROXY_WALLET.slice(-4)}`);
+    console.log(
+        `   Trading Wallet: ${ENV.PROXY_WALLET.slice(0, 6)}...${ENV.PROXY_WALLET.slice(-4)}`
+    );
     console.log(`   Tracking ${ENV.USER_ADDRESSES.length} trader(s):`);
     ENV.USER_ADDRESSES.forEach((addr, idx) => {
         console.log(`      ${idx + 1}. ${addr.slice(0, 6)}...${addr.slice(-4)}`);
@@ -110,7 +122,9 @@ const main = async () => {
         console.error(`\n${colors.red}${colors.bright}❌ Health Check Error${colors.reset}\n`);
         if (error instanceof Error) {
             console.error(`${error.message}\n`);
-            console.error(`${colors.yellow}💡 Tip: Run the setup wizard to reconfigure:${colors.reset}`);
+            console.error(
+                `${colors.yellow}💡 Tip: Run the setup wizard to reconfigure:${colors.reset}`
+            );
             console.error(`   ${colors.cyan}npm run setup${colors.reset}\n`);
         } else {
             console.error(error);

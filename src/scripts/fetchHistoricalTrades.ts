@@ -77,7 +77,7 @@ const fetchTradesForTrader = async (address: string): Promise<TradeApiResponse[]
     const sinceTimestamp = Math.floor((Date.now() - HISTORY_DAYS * 24 * 60 * 60 * 1000) / 1000);
 
     let offset = 0;
-    let allTrades: TradeApiResponse[] = [];
+    const allTrades: TradeApiResponse[] = [];
     let hasMore = true;
 
     while (hasMore && allTrades.length < MAX_TRADES_PER_TRADER) {
@@ -147,9 +147,7 @@ const main = async () => {
 
     console.log('📥 Starting trade history export');
     console.log(`Traders: ${USER_ADDRESSES.length}`);
-    console.log(
-        `Period: ${HISTORY_DAYS} days, max ${MAX_TRADES_PER_TRADER} trades per trader`
-    );
+    console.log(`Period: ${HISTORY_DAYS} days, max ${MAX_TRADES_PER_TRADER} trades per trader`);
 
     const addressChunks = chunk(USER_ADDRESSES, MAX_PARALLEL);
 

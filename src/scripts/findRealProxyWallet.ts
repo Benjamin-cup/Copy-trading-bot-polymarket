@@ -91,9 +91,13 @@ async function findRealProxyWallet() {
                                         );
 
                                         if (positions && positions.length > 0) {
-                                            console.log(`         🎉 FOUND PROXY WITH POSITIONS!\n`);
+                                            console.log(
+                                                `         🎉 FOUND PROXY WITH POSITIONS!\n`
+                                            );
                                             console.log(`         Proxy address: ${log.address}`);
-                                            console.log(`         Positions: ${positions.length}\n`);
+                                            console.log(
+                                                `         Positions: ${positions.length}\n`
+                                            );
 
                                             console.log(
                                                 '━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n'

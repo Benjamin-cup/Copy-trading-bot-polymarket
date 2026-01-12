@@ -287,7 +287,6 @@ Ensure traders are:
     ```
 
 3. **Review Results:**
-
     - Check risk scores
     - Verify metrics meet your criteria
     - Review trading history

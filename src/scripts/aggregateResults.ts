@@ -329,9 +329,7 @@ async function aggregateResults() {
     };
 
     fs.writeFileSync(outputPath, JSON.stringify(output, null, 2), 'utf8');
-    console.log(
-        `\n${colors.green('✓ Aggregated results saved:')} ${colors.cyan(outputPath)}\n`
-    );
+    console.log(`\n${colors.green('✓ Aggregated results saved:')} ${colors.cyan(outputPath)}\n`);
 }
 
 aggregateResults().catch((error) => {

@@ -124,7 +124,9 @@ const checkMyStats = async () => {
             console.log(
                 `      • Sells: ${sellTrades.length} (volume: $${totalSellVolume.toFixed(2)})`
             );
-            console.log(`      • Total volume: $${(totalBuyVolume + totalSellVolume).toFixed(2)}\n`);
+            console.log(
+                `      • Total volume: $${(totalBuyVolume + totalSellVolume).toFixed(2)}\n`
+            );
 
             // Last 20 trades
             const recentTrades = activities.slice(0, 20);
@@ -162,7 +164,9 @@ const checkMyStats = async () => {
             const totalUnrealizedPnl = positions.reduce((sum, p) => sum + (p.cashPnl || 0), 0);
 
             console.log('   ✅ Realized P&L (closed positions):');
-            console.log(`      → $${totalRealizedPnl.toFixed(2)} ← THIS is displayed on the chart\n`);
+            console.log(
+                `      → $${totalRealizedPnl.toFixed(2)} ← THIS is displayed on the chart\n`
+            );
 
             console.log('   📊 Unrealized P&L (open positions):');
             console.log(

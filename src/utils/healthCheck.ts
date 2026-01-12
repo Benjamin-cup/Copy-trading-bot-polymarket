@@ -3,6 +3,7 @@ import { ENV } from '../config/env';
 import getMyBalance from './getMyBalance';
 import fetchData from './fetchData';
 import Logger from './logger';
+import { ErrorHandler } from './errorHandler';
 
 export interface HealthCheckResult {
     healthy: boolean;
@@ -16,7 +17,19 @@ export interface HealthCheckResult {
 }
 
 /**
- * Perform health check on all critical components
+ * Performs a comprehensive health check on all critical system components.
+ * Checks database connectivity, RPC endpoint availability, USDC balance, and Polymarket API responsiveness.
+ * Returns detailed status information for each component and an overall health assessment.
+ *
+ * @returns {Promise<HealthCheckResult>} A promise that resolves to a health check result object containing status for all components.
+ *
+ * @example
+ * ```typescript
+ * const health = await performHealthCheck();
+ * if (!health.healthy) {
+ *   console.log('System unhealthy:', health.checks);
+ * }
+ * ```
  */
 export const performHealthCheck = async (): Promise<HealthCheckResult> => {
     const checks: HealthCheckResult['checks'] = {
@@ -135,7 +148,17 @@ export const performHealthCheck = async (): Promise<HealthCheckResult> => {
 };
 
 /**
- * Log health check results
+ * Logs the health check results to the console in a formatted manner.
+ * Displays overall health status and detailed status for each component with appropriate emojis.
+ *
+ * @param {HealthCheckResult} result - The health check result object to log.
+ * @returns {void}
+ *
+ * @example
+ * ```typescript
+ * const health = await performHealthCheck();
+ * logHealthCheck(health);
+ * ```
  */
 export const logHealthCheck = (result: HealthCheckResult): void => {
     Logger.separator();

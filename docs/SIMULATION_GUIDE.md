@@ -207,19 +207,16 @@ const MULTIPLIER = 1.0;
 ### Current Limitations
 
 1. **Historical Capital Estimation**:
-
     - Trader's capital at each timestamp is estimated
     - Real capital fluctuates with market prices
     - Approximation may differ from reality
 
 2. **Simplified Execution**:
-
     - Assumes instant fills at trader's price
     - No slippage modeling
     - No gas fees included
 
 3. **Position Values**:
-
     - Current positions valued at latest market price
     - Doesn't account for liquidity issues
     - May differ from actual execution prices

@@ -190,9 +190,7 @@ const main = async () => {
         positionsByCondition.set(pos.conditionId, existing);
     });
 
-    console.log(
-        `\n📦 Grouped into ${positionsByCondition.size} unique conditions`
-    );
+    console.log(`\n📦 Grouped into ${positionsByCondition.size} unique conditions`);
 
     let conditionIndex = 0;
     for (const [conditionId, positions] of positionsByCondition.entries()) {

@@ -245,12 +245,10 @@ Balances:
 ### No Trades Detected
 
 1. **Verify trader is active**
-
     - Check their Polymarket profile
     - Confirm they've traded recently
 
 2. **Check logs for errors**
-
     - Look for API connection issues
     - Verify MongoDB is storing data
 
@@ -297,13 +295,11 @@ Balances:
 Once your bot is running successfully:
 
 1. **First 24 Hours**
-
     - Monitor continuously
     - Verify each trade execution
     - Check position sizing is correct
 
 2. **Week 1**
-
     - Review profitability
     - Compare your P&L to trader's P&L
     - Adjust if trades are too large/small

@@ -103,7 +103,9 @@ async function computeGnosisSafeAddress() {
                                         `https://data-api.polymarket.com/positions?user=${proxyAddress}`
                                     );
 
-                                    console.log(`   Positions on Proxy: ${positions?.length || 0}\n`);
+                                    console.log(
+                                        `   Positions on Proxy: ${positions?.length || 0}\n`
+                                    );
 
                                     if (positions && positions.length > 0) {
                                         console.log(

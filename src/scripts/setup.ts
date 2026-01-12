@@ -68,7 +68,9 @@ function printHeader() {
     console.log('     🤖 POLYMARKET COPY TRADING BOT - SETUP WIZARD');
     console.log('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
     console.log(`${colors.reset}\n`);
-    console.log(`${colors.yellow}This wizard will help you create your .env configuration file.${colors.reset}`);
+    console.log(
+        `${colors.yellow}This wizard will help you create your .env configuration file.${colors.reset}`
+    );
     console.log(`${colors.yellow}Press Ctrl+C at any time to cancel.\n${colors.reset}`);
 }
 
@@ -78,9 +80,7 @@ function printSection(title: string) {
 
 async function setupUserAddresses(): Promise<string> {
     printSection('STEP 1: TRADERS TO COPY');
-    console.log(
-        `${colors.cyan}Find top traders on:${colors.reset}`
-    );
+    console.log(`${colors.cyan}Find top traders on:${colors.reset}`);
     console.log('  • https://polymarket.com/leaderboard');
     console.log('  • https://predictfolio.com\n');
 
@@ -89,7 +89,7 @@ async function setupUserAddresses(): Promise<string> {
     console.log('  • Win rate above 55%');
     console.log('  • Recent trading activity\n');
 
-    let addresses: string[] = [];
+    const addresses: string[] = [];
     let addingMore = true;
 
     while (addingMore) {
@@ -99,7 +99,9 @@ async function setupUserAddresses(): Promise<string> {
 
         if (!address) {
             if (addresses.length === 0) {
-                console.log(`${colors.red}✗ You must add at least one trader address!${colors.reset}\n`);
+                console.log(
+                    `${colors.red}✗ You must add at least one trader address!${colors.reset}\n`
+                );
                 continue;
             }
             addingMore = false;
@@ -169,7 +171,9 @@ async function setupWallet(): Promise<{ wallet: string; privateKey: string }> {
 
 async function setupDatabase(): Promise<string> {
     printSection('STEP 3: DATABASE');
-    console.log(`${colors.cyan}Free MongoDB Atlas:${colors.reset} https://www.mongodb.com/cloud/atlas/register\n`);
+    console.log(
+        `${colors.cyan}Free MongoDB Atlas:${colors.reset} https://www.mongodb.com/cloud/atlas/register\n`
+    );
     console.log(`${colors.yellow}Setup steps:${colors.reset}`);
     console.log('  1. Create free account');
     console.log('  2. Create a cluster');
@@ -184,7 +188,9 @@ async function setupDatabase(): Promise<string> {
         );
 
         if (!mongoUri.startsWith('mongodb')) {
-            console.log(`${colors.red}✗ Invalid MongoDB URI. Should start with 'mongodb://' or 'mongodb+srv://'${colors.reset}\n`);
+            console.log(
+                `${colors.red}✗ Invalid MongoDB URI. Should start with 'mongodb://' or 'mongodb+srv://'${colors.reset}\n`
+            );
             mongoUri = '';
             continue;
         }
@@ -203,12 +209,12 @@ async function setupRPC(): Promise<string> {
 
     let rpcUrl = '';
     while (!rpcUrl) {
-        rpcUrl = await question(
-            `${colors.green}Enter Polygon RPC URL: ${colors.reset}`
-        );
+        rpcUrl = await question(`${colors.green}Enter Polygon RPC URL: ${colors.reset}`);
 
         if (!rpcUrl.startsWith('http')) {
-            console.log(`${colors.red}✗ Invalid RPC URL. Should start with 'http://' or 'https://'${colors.reset}\n`);
+            console.log(
+                `${colors.red}✗ Invalid RPC URL. Should start with 'http://' or 'https://'${colors.reset}\n`
+            );
             rpcUrl = '';
             continue;
         }
@@ -258,7 +264,9 @@ async function setupStrategy(): Promise<{
         };
     }
 
-    console.log(`${colors.green}✓ Using default strategy: PERCENTAGE, 10%, 1.0x multiplier${colors.reset}`);
+    console.log(
+        `${colors.green}✓ Using default strategy: PERCENTAGE, 10%, 1.0x multiplier${colors.reset}`
+    );
     return {
         copyStrategy: 'PERCENTAGE',
         copySize: '10.0',
@@ -402,7 +410,9 @@ async function main() {
             );
 
             if (overwrite.toLowerCase() !== 'y' && overwrite.toLowerCase() !== 'yes') {
-                console.log(`\n${colors.yellow}Setup cancelled. Your existing .env file was not modified.${colors.reset}`);
+                console.log(
+                    `\n${colors.yellow}Setup cancelled. Your existing .env file was not modified.${colors.reset}`
+                );
                 rl.close();
                 return;
             }
@@ -417,9 +427,13 @@ async function main() {
         fs.writeFileSync(envPath, envContent);
 
         // Success!
-        console.log(`\n${colors.green}${colors.bright}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${colors.reset}`);
+        console.log(
+            `\n${colors.green}${colors.bright}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${colors.reset}`
+        );
         console.log(`${colors.green}${colors.bright}    ✓ SETUP COMPLETE!${colors.reset}`);
-        console.log(`${colors.green}${colors.bright}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${colors.reset}\n`);
+        console.log(
+            `${colors.green}${colors.bright}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${colors.reset}\n`
+        );
 
         console.log(`${colors.cyan}Configuration saved to: ${colors.reset}${envPath}\n`);
 
@@ -433,7 +447,9 @@ async function main() {
         console.log(`  1. Review your .env file: ${colors.cyan}cat .env${colors.reset}`);
         console.log(`  2. Install dependencies:   ${colors.cyan}npm install${colors.reset}`);
         console.log(`  3. Build the bot:          ${colors.cyan}npm run build${colors.reset}`);
-        console.log(`  4. Run health check:       ${colors.cyan}npm run health-check${colors.reset}`);
+        console.log(
+            `  4. Run health check:       ${colors.cyan}npm run health-check${colors.reset}`
+        );
         console.log(`  5. Start trading:          ${colors.cyan}npm start${colors.reset}\n`);
 
         console.log(`${colors.yellow}${colors.bright}📖 DOCUMENTATION:${colors.reset}\n`);
@@ -456,4 +472,3 @@ async function main() {
 
 // Run the setup wizard
 main();
-

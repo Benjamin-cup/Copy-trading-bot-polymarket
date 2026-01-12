@@ -113,12 +113,12 @@ npm run compare
 
 ### What the metrics mean
 
-| Metric            | Description                    | Good result      |
-| ----------------- | ------------------------------ | ---------------- |
-| **ROI**           | Return on investment (%)        | > 15%            |
-| **Total P&L**     | Total profit/loss ($)          | Positive         |
-| **Copied/Total**  | Percentage of copied trades     | > 70%            |
-| **Unrealized P&L**| Profit from open positions      | Positive         |
+| Metric             | Description                 | Good result |
+| ------------------ | --------------------------- | ----------- |
+| **ROI**            | Return on investment (%)    | > 15%       |
+| **Total P&L**      | Total profit/loss ($)       | Positive    |
+| **Copied/Total**   | Percentage of copied trades | > 70%       |
+| **Unrealized P&L** | Profit from open positions  | Positive    |
 
 ### Good signs ✅
 

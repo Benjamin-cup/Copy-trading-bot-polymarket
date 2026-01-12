@@ -142,13 +142,11 @@ order_arges = {
 Before deploying to production:
 
 1. **Test BUY with balance near limit:**
-
     - Your balance: $100
     - Trade size after multiplier: $95-99
     - Expected: Should execute successfully
 
 2. **Test SELL with small order book:**
-
     - Remaining: 2 tokens
     - Best bid: 0.5 tokens
     - Expected: Should skip with "Order amount below minimum" message

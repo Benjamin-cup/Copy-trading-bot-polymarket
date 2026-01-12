@@ -280,12 +280,12 @@ rm -rf trader_data_cache/
 
 ### Choosing optimal multiplier
 
-| Multiplier | Risk        | When to use                              |
-| ---------- | ----------- | ---------------------------------------- |
-| 0.5x       | Low         | Testing, small capital                   |
-| 1.0x       | Medium      | Standard copy trading                    |
-| 2.0x       | High        | Confidence in trader                     |
-| 3.0x+      | Very high   | Aggressive strategy, only with experience |
+| Multiplier | Risk      | When to use                               |
+| ---------- | --------- | ----------------------------------------- |
+| 0.5x       | Low       | Testing, small capital                    |
+| 1.0x       | Medium    | Standard copy trading                     |
+| 2.0x       | High      | Confidence in trader                      |
+| 3.0x+      | Very high | Aggressive strategy, only with experience |
 
 ## Tips and best practices
 

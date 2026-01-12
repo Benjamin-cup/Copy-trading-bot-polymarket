@@ -85,7 +85,9 @@ async function findGnosisSafeProxy() {
                         console.log('   ✅ Addresses match! Everything is configured correctly.\n');
                     } else {
                         console.log('   ❌ ADDRESSES DO NOT MATCH!\n');
-                        console.log('   This is why you see different positions on bot and frontend.\n');
+                        console.log(
+                            '   This is why you see different positions on bot and frontend.\n'
+                        );
                     }
                 }
             } else {

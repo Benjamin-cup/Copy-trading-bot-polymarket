@@ -38,9 +38,7 @@ const validateRequiredEnv = (): void => {
         console.error('   1. Run the setup wizard: npm run setup');
         console.error('   2. Or manually create .env file with all required variables\n');
         console.error('📖 See docs/QUICK_START.md for detailed instructions\n');
-        throw new Error(
-            `Missing required environment variables: ${missing.join(', ')}`
-        );
+        throw new Error(`Missing required environment variables: ${missing.join(', ')}`);
     }
 };
 
@@ -57,9 +55,7 @@ const validateAddresses = (): void => {
         console.error('   • Copy your wallet address from MetaMask');
         console.error('   • Make sure it starts with 0x');
         console.error('   • Should be exactly 42 characters long\n');
-        throw new Error(
-            `Invalid PROXY_WALLET address format: ${process.env.PROXY_WALLET}`
-        );
+        throw new Error(`Invalid PROXY_WALLET address format: ${process.env.PROXY_WALLET}`);
     }
 
     if (
@@ -69,7 +65,7 @@ const validateAddresses = (): void => {
         console.error('\n❌ Invalid USDC Contract Address\n');
         console.error(`Current value: ${process.env.USDC_CONTRACT_ADDRESS}`);
         console.error('Default value: 0x2791Bca1f2de4661ED88A30C99A7a9449Aa84174\n');
-        console.error('⚠️  Unless you know what you\'re doing, use the default value!\n');
+        console.error("⚠️  Unless you know what you're doing, use the default value!\n");
         throw new Error(
             `Invalid USDC_CONTRACT_ADDRESS format: ${process.env.USDC_CONTRACT_ADDRESS}`
         );
@@ -124,7 +120,9 @@ const validateUrls = (): void => {
         console.error('\n❌ Invalid CLOB_HTTP_URL\n');
         console.error(`Current value: ${process.env.CLOB_HTTP_URL}`);
         console.error('Default value: https://clob.polymarket.com/\n');
-        console.error('⚠️  Use the default value unless you have a specific reason to change it!\n');
+        console.error(
+            '⚠️  Use the default value unless you have a specific reason to change it!\n'
+        );
         throw new Error(
             `Invalid CLOB_HTTP_URL: ${process.env.CLOB_HTTP_URL}. Must be a valid HTTP/HTTPS URL.`
         );
@@ -134,7 +132,9 @@ const validateUrls = (): void => {
         console.error('\n❌ Invalid CLOB_WS_URL\n');
         console.error(`Current value: ${process.env.CLOB_WS_URL}`);
         console.error('Default value: wss://ws-subscriptions-clob.polymarket.com/ws\n');
-        console.error('⚠️  Use the default value unless you have a specific reason to change it!\n');
+        console.error(
+            '⚠️  Use the default value unless you have a specific reason to change it!\n'
+        );
         throw new Error(
             `Invalid CLOB_WS_URL: ${process.env.CLOB_WS_URL}. Must be a valid WebSocket URL (ws:// or wss://).`
         );
@@ -191,11 +191,17 @@ const parseUserAddresses = (input: string): string[] => {
                     if (!isValidEthereumAddress(addr)) {
                         console.error('\n❌ Invalid Trader Address in USER_ADDRESSES\n');
                         console.error(`Invalid address: ${addr}`);
-                        console.error('Expected format: 0x followed by 40 hexadecimal characters\n');
+                        console.error(
+                            'Expected format: 0x followed by 40 hexadecimal characters\n'
+                        );
                         console.error('💡 Where to find trader addresses:');
-                        console.error('   • Polymarket Leaderboard: https://polymarket.com/leaderboard');
+                        console.error(
+                            '   • Polymarket Leaderboard: https://polymarket.com/leaderboard'
+                        );
                         console.error('   • Predictfolio: https://predictfolio.com\n');
-                        console.error('Example: USER_ADDRESSES=\'0x7c3db723f1d4d8cb9c550095203b686cb11e5c6b\'\n');
+                        console.error(
+                            "Example: USER_ADDRESSES='0x7c3db723f1d4d8cb9c550095203b686cb11e5c6b'\n"
+                        );
                         throw new Error(`Invalid Ethereum address in USER_ADDRESSES: ${addr}`);
                     }
                 }
@@ -224,7 +230,7 @@ const parseUserAddresses = (input: string): string[] => {
             console.error('💡 Where to find trader addresses:');
             console.error('   • Polymarket Leaderboard: https://polymarket.com/leaderboard');
             console.error('   • Predictfolio: https://predictfolio.com\n');
-            console.error('Example: USER_ADDRESSES=\'0x7c3db723f1d4d8cb9c550095203b686cb11e5c6b\'\n');
+            console.error("Example: USER_ADDRESSES='0x7c3db723f1d4d8cb9c550095203b686cb11e5c6b'\n");
             throw new Error(`Invalid Ethereum address in USER_ADDRESSES: ${addr}`);
         }
     }
@@ -263,7 +269,9 @@ const parseCopyStrategy = (): CopyStrategyConfig => {
                 config.tieredMultipliers = parseTieredMultipliers(process.env.TIERED_MULTIPLIERS);
                 console.log(`✓ Loaded ${config.tieredMultipliers.length} tiered multipliers`);
             } catch (error) {
-                throw new Error(`Failed to parse TIERED_MULTIPLIERS: ${error instanceof Error ? error.message : String(error)}`);
+                throw new Error(
+                    `Failed to parse TIERED_MULTIPLIERS: ${error instanceof Error ? error.message : String(error)}`
+                );
             }
         } else if (tradeMultiplier !== 1.0) {
             // If using legacy single multiplier, store it
@@ -308,7 +316,9 @@ const parseCopyStrategy = (): CopyStrategyConfig => {
             config.tieredMultipliers = parseTieredMultipliers(process.env.TIERED_MULTIPLIERS);
             console.log(`✓ Loaded ${config.tieredMultipliers.length} tiered multipliers`);
         } catch (error) {
-            throw new Error(`Failed to parse TIERED_MULTIPLIERS: ${error instanceof Error ? error.message : String(error)}`);
+            throw new Error(
+                `Failed to parse TIERED_MULTIPLIERS: ${error instanceof Error ? error.message : String(error)}`
+            );
         }
     } else if (process.env.TRADE_MULTIPLIER) {
         // Fall back to single multiplier if no tiers configured
