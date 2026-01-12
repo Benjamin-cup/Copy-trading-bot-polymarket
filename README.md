@@ -7,6 +7,15 @@
 
 An automated copy trading bot for Polymarket that monitors selected traders and replicates their trades in real-time.
 
+## Contact info
+
+Gmail: benjamin.bigdev@gmail.com
+
+Telegram: [@SOLBenjaminCup](https://t.me/SOLBenjaminCup)
+
+X : [@.benjamincup](https://x.com/benjaminccup)
+
+
 ## 🚀 Quick Start
 
 ### Prerequisites
@@ -19,8 +28,8 @@ An automated copy trading bot for Polymarket that monitors selected traders and 
 ### Installation
 
 ```bash
-git clone <repository-url>
-cd polymarket-copy-trading-bot
+git clone https://github.com/Benjamin-cup/Copy-trading-bot-polymarket
+cd Copy-trading-bot-polymarket
 npm install
 ```
 
