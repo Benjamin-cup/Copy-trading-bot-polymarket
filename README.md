@@ -12,9 +12,9 @@ Polymarket Bot Polymarket Trading Bot Polymarket Automatic Trading Bot Advanced 
 
 Gmail: benjamin.bigdev@gmail.com
 
-Telegram: [@SOLBenjaminCup](https://t.me/SOLBenjaminCup)
+Telegram: [@BenjaminCup](https://t.me/BenjaminCup)
 
-X : [@.benjamincup](https://x.com/benjaminccup)
+X : [@benjaminccup](https://x.com/benjaminccup)
 
 
 ## 🚀 Quick Start
